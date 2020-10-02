@@ -1,0 +1,15 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+nav{
+    background-color: #585858;
+    padding: 20px;
+}
+
+ul li{
+    color: #eee;
+    display: inline;
+    padding: 15px;
+}
