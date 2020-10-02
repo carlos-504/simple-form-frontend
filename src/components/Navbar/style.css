@@ -13,3 +13,12 @@ ul li{
     display: inline;
     padding: 15px;
 }
+
+.link {
+    text-decoration: none;
+    color: #eee;
+}
+
+ul li:hover{
+    background-color: rgba(164, 172, 175, 0.329);
+}

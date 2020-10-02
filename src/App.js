@@ -1,23 +1,14 @@
 import React from "react";
 import "./App.css";
 import "fontsource-roboto";
-import Navbar from "./components/Navbar";
-import Form from "./components/Form";
-import { Container } from "@material-ui/core";
+import Routes from "./Routes";
 
 function App() {
   return (
     <>
-      <Navbar />
-      <Container className="container" component="div" maxWidth="md">
-        <Form enviarForm={dadosForm}/>
-      </Container>
+      <Routes />
     </>
   );
-
-  function dadosForm(dados){
-    console.log(dados)
-  }
 }
 
 export default App;
