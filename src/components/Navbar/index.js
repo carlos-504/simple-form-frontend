@@ -7,16 +7,12 @@ function Navbar() {
     <header>
       <nav>
         <ul>
-          <li>
-            <Link to="/" className="link">
-              CADASTAR
-            </Link>
-          </li>
-          <li>
-            <Link to="/listar" className="link">
-              LISTAR
-            </Link>
-          </li>
+          <Link to="/" className="link">
+            <li>CADASTAR</li>
+          </Link>
+          <Link to="/listar" className="link">
+            <li>LISTAR</li>
+          </Link>
         </ul>
       </nav>
     </header>
