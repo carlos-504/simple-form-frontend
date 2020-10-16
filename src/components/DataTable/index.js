@@ -16,20 +16,11 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-
-function DataTable() {
+function DataTable({ dados }) {
   const classes = useStyles();
+
+  const {nome, sobrenome, email, telefone, celular, cidade} = dados || ""
+    
 
   return (
     <TableContainer component={Paper} >
@@ -38,16 +29,22 @@ function DataTable() {
           <TableRow>
             <TableCell>ID</TableCell>
             <TableCell align="right">Nome</TableCell>
-            <TableCell align="right">telefone</TableCell>
+            <TableCell align="right">Sobrenome</TableCell>
+            <TableCell align="right">Email</TableCell>
+            <TableCell align="right">Telefone</TableCell>
+            <TableCell align="right">Celular</TableCell>
             <TableCell align="right">Cidade</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
             <TableRow key>
               <TableCell component="th" scope="row"> 1 </TableCell>
-              <TableCell align="right">Carlos</TableCell>
-              <TableCell align="right">91768854</TableCell> 
-              <TableCell align="right">Samambaia</TableCell> 
+              <TableCell align="right">{ nome }</TableCell>
+              <TableCell align="right">{ sobrenome }</TableCell>
+              <TableCell align="right">{ email }</TableCell>
+              <TableCell align="right">{ telefone }</TableCell>
+              <TableCell align="right">{ celular }</TableCell>
+              <TableCell align="right">{ cidade }</TableCell>
             </TableRow>
         </TableBody>
       </Table>

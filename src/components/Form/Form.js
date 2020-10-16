@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@material-ui/core";
+import { useHistory } from "react-router-dom"
 
 function Form({ enviarForm }) {
   const [nome, setNome] = useState("");
@@ -8,6 +9,7 @@ function Form({ enviarForm }) {
   const [telefone, setTelefone] = useState("");
   const [celular, setCelular] = useState("");
   const [cidade, setCidade] = useState("");
+  const history = useHistory();
 
   return (
     <>
@@ -82,7 +84,10 @@ function Form({ enviarForm }) {
           margin="normal"
           fullWidth
         />
-        <Button variant="contained" color="primary" type="submit">
+        <Button onClick={() => history.push({
+          pathname: '/listar',
+          dados: { nome, sobrenome, email, telefone, celular, cidade }
+        })}  variant="contained" color="primary" type="submit">
           Salvar
         </Button>
       </form>
