@@ -10,14 +10,11 @@ function Main() {
     <>
       <Navbar />
       <Container component="div" maxWidth="md">
-        <Form enviarForm={dadosForm} />
+        <Form />
       </Container>
     </>
   );
 
-  function dadosForm(dados){
-    console.log(dados)
-  }
 }
 
 export default Main;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {
   Table,
   TableBody,
@@ -8,7 +8,18 @@ import {
   TableRow,
   Paper,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import api from "../../api";
+
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
 
 const useStyles = makeStyles({
   table: {
@@ -16,36 +27,52 @@ const useStyles = makeStyles({
   },
 });
 
-function DataTable({ dados }) {
+function DataTable() {
   const classes = useStyles();
+  const [usuarios, setUsuario] = useState([]);
 
-  const {nome, sobrenome, email, telefone, celular, cidade} = dados || ""
-    
+  useEffect(() => {
+    (async function getDados(){
+      try{
+        const response = await api.get('/usuarios')
+        const dados = response.data
+  
+        setUsuario(dados)
+        //console.log("Usuarios:", usuarios)
+  
+      }catch (erro) {
+        console.log("Errudo", erro)
+      }
 
+    })()
+  }, [])
+  
   return (
     <TableContainer component={Paper} >
-      <Table className={classes.table} aria-label="simple table">
+      <Table className={classes.table} aria-label="simple table" >
         <TableHead>
           <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell align="right">Nome</TableCell>
-            <TableCell align="right">Sobrenome</TableCell>
-            <TableCell align="right">Email</TableCell>
-            <TableCell align="right">Telefone</TableCell>
-            <TableCell align="right">Celular</TableCell>
-            <TableCell align="right">Cidade</TableCell>
+            <StyledTableCell align="left" variant="head">ID</StyledTableCell>
+            <StyledTableCell align="left" variant="head">Nome</StyledTableCell>
+            <StyledTableCell align="left" variant="head">Sobrenome</StyledTableCell>
+            <StyledTableCell align="left" variant="head">Email</StyledTableCell>
+            <StyledTableCell align="left" variant="head">Telefone</StyledTableCell>
+            <StyledTableCell align="left" variant="head">Celular</StyledTableCell>
+            <StyledTableCell align="left" variant="head">Cidade</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-            <TableRow key>
-              <TableCell component="th" scope="row"> 1 </TableCell>
-              <TableCell align="right">{ nome }</TableCell>
-              <TableCell align="right">{ sobrenome }</TableCell>
-              <TableCell align="right">{ email }</TableCell>
-              <TableCell align="right">{ telefone }</TableCell>
-              <TableCell align="right">{ celular }</TableCell>
-              <TableCell align="right">{ cidade }</TableCell>
-            </TableRow>
+            {usuarios.map((usuario) => (
+                <TableRow key={usuario.id} hover={true}>
+                  <TableCell align="left" variant="body">{usuario.id}</TableCell>
+                  <TableCell align="left" variant="body">{usuario.nome}</TableCell>
+                  <TableCell align="left" variant="body">{usuario.sobrenome}</TableCell>
+                  <TableCell align="left" variant="body">{usuario.email}</TableCell>
+                  <TableCell align="left" variant="body">{usuario.telefone}</TableCell>
+                  <TableCell align="left" variant="body">{usuario.celular}</TableCell>
+                  <TableCell align="left" variant="body">{usuario.cidade}</TableCell>
+                </TableRow>    
+            ))}
         </TableBody>
       </Table>
     </TableContainer>
