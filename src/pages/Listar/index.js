@@ -1,8 +1,9 @@
 import React from "react";
 import Navbar from "../../components/Navbar";
 import DataTable from "../../components/DataTable";
-import { Container } from "@material-ui/core";
+import { Button, Container } from "@material-ui/core";
 import "./style.css";
+import { Link } from "react-router-dom";
 
 function Listar() {
 
@@ -12,6 +13,11 @@ function Listar() {
       <Container component="div" maxWidth="md">
         <h1>Usuários</h1>
         <DataTable />
+        <div className="button_cadastrar">
+          <Link to="/">
+            <Button variant="contained" color="primary" size="small">Cadastrar</Button>
+          </Link>
+        </div>
       </Container>
     </>
   );
