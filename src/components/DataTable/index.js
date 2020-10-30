@@ -36,6 +36,7 @@ function DataTable() {
         .then(response => {
           setUsuario(response.data)
         })
+        .catch(erro => console.log(erro))
   }, [])
   
   return (
@@ -50,6 +51,7 @@ function DataTable() {
             <StyledTableCell align="left" variant="head">Telefone</StyledTableCell>
             <StyledTableCell align="left" variant="head">Celular</StyledTableCell>
             <StyledTableCell align="left" variant="head">Cidade</StyledTableCell>
+            <StyledTableCell align="center" variant="head" colSpan="2" >Ações</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -62,6 +64,8 @@ function DataTable() {
                   <TableCell align="left" variant="body">{usuario.telefone}</TableCell>
                   <TableCell align="left" variant="body">{usuario.celular}</TableCell>
                   <TableCell align="left" variant="body">{usuario.cidade}</TableCell>
+                  <TableCell align="left" variant="body">Editar</TableCell>
+                  <TableCell align="left" variant="body">Excluir</TableCell>
                 </TableRow>    
             ))}
         </TableBody>
