@@ -32,19 +32,10 @@ function DataTable() {
   const [usuarios, setUsuario] = useState([]);
 
   useEffect(() => {
-    (async function getDados(){
-      try{
-        const response = await api.get('/usuarios')
-        const dados = response.data
-  
-        setUsuario(dados)
-        //console.log("Usuarios:", usuarios)
-  
-      }catch (erro) {
-        console.log("Errudo", erro)
-      }
-
-    })()
+    api.get('/usuarios')
+        .then(response => {
+          setUsuario(response.data)
+        })
   }, [])
   
   return (
