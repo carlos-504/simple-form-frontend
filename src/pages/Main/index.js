@@ -10,6 +10,7 @@ function Main() {
     <>
       <Navbar />
       <Container component="div" maxWidth="md">
+        <h1>Cadastrar Usuário</h1>
         <Form />
       </Container>
     </>

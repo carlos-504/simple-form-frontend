@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@material-ui/core";
 import api from "../../api"
+import "./style.css"
 
 function Form() {
   const [nome, setNome] = useState("");
@@ -12,7 +13,7 @@ function Form() {
 
   async function handlerSubmit(event){
 
-    event.preventDefeault()
+    event.preventDefault()
 
     const dados = {
       nome: nome,
@@ -25,19 +26,26 @@ function Form() {
 
     const response = await api.post('/usuarios', dados)
 
-    //console.log(response)
-
     if(response.status === 200){
       window.location.href = '/listar'
+      console.log("Usuário cadastrado!!")
     } else {
-      alert('Erro ao cadastrar')
+      alert ('erro ao cadastrar')
     }
 
+    /*
+    api.post('/usuarios', dados)
+        .then(() => {
+          alert('Dados cadastrados com sucesso')
+          //response.redirect(confirmCad)
+          //return <Link to="/confirmCad"/>
+        })
+        .catch(erro => console.log(erro))
+    */
   }
 
   return (
     <>
-      <h1 className="tipografia_form">Formulário de Cadastro</h1>
       <form onSubmit={handlerSubmit} >
         <TextField
           value={nome}
@@ -49,6 +57,7 @@ function Form() {
           variant="outlined"
           margin="normal"
           fullWidth
+          required
         />
         <TextField
           value={sobrenome}
@@ -60,6 +69,7 @@ function Form() {
           variant="outlined"
           margin="normal"
           fullWidth
+          required
         />
         <TextField
           value={email}
@@ -71,6 +81,7 @@ function Form() {
           variant="outlined"
           margin="normal"
           fullWidth
+          required
         />
         <TextField
           value={telefone}
@@ -81,6 +92,7 @@ function Form() {
           name="telefone"
           variant="outlined"
           margin="normal"
+          required
         />
         <TextField
           value={celular}
@@ -91,6 +103,7 @@ function Form() {
           name="celular"
           variant="outlined"
           margin="normal"
+          required
         />
         <TextField
           value={cidade}
@@ -102,10 +115,13 @@ function Form() {
           variant="outlined"
           margin="normal"
           fullWidth
+          required
         />
-        <Button variant="contained" color="primary" type="submit">
-          Salvar
-        </Button>
+        <div className="button_salvar">
+          <Button variant="contained" color="primary" type="submit">
+            Salvar
+          </Button>
+        </div>
       </form>
     </>
   );
