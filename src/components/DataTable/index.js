@@ -10,8 +10,11 @@ import {
   Button
 } from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
-//import {Alert} from '@material-ui/lab';
+import {ReactComponent as DeleteLogo} from '../../assets/images/deletar.svg'
+import {ReactComponent as EditaLogo} from '../../assets/images/editar.svg'
+import {ReactComponent as ViewLogo} from '../../assets/images/view.svg'
 import api from "../../api";
+import "./style.css"
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -29,17 +32,8 @@ const useStyles = makeStyles({
   },
 });
 
-const useAlerts = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    '& > * + *': {
-      marginTop: theme.spacing(2),
-    },
-  },
-}));
-
 function DataTable() {
-  const classes = [useStyles(), useAlerts()];
+  const classes = [useStyles()];
   const [usuarios, setUsuario] = useState([]);
 
   useEffect(() => {
@@ -72,7 +66,7 @@ function DataTable() {
               <StyledTableCell align="left" variant="head">Email</StyledTableCell>
               <StyledTableCell align="left" variant="head">Celular</StyledTableCell>
               <StyledTableCell align="left" variant="head">Cidade</StyledTableCell>
-              <StyledTableCell align="center" variant="head" colSpan="3" >Ações</StyledTableCell>
+              <StyledTableCell align="center" variant="head">Ações</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -83,14 +77,16 @@ function DataTable() {
                     <TableCell align="left" variant="body">{usuario.email}</TableCell>
                     <TableCell align="left" variant="body">{usuario.celular}</TableCell>
                     <TableCell align="left" variant="body">{usuario.cidade}</TableCell>
-                    <TableCell align="left" variant="body" >
-                      <Button href={`/vizualizar/${usuario.id}`}>View</Button>
-                    </TableCell>
-                    <TableCell align="left" variant="body" >
-                      <Button href={`/editar/${usuario.id}`}>Editar</Button>
-                    </TableCell>
                     <TableCell align="left" variant="body">
-                      <Button onClick={() => handleExcluir(usuario.id)}>Excluir</Button>
+                      <Button href={`/vizualizar/${usuario.id}`}>
+                        <ViewLogo className="logo_size" title="Vizualizar" />
+                      </Button>
+                      <Button href={`/editar/${usuario.id}`}>
+                        <EditaLogo  className="logo_size" title="Editar"/>
+                      </Button>
+                      <Button >
+                        <DeleteLogo className="logo_size" title="Excluir" onClick={() => handleExcluir(usuario.id)}/>
+                      </Button>
                     </TableCell>
                   </TableRow>    
               ))}
