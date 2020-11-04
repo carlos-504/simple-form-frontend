@@ -52,7 +52,7 @@ function DataTable() {
 
   async function handleExcluir(id){
     if(window.confirm("Deseja realmente excluir esse usuário")){
-      const result = await api.delete('/usuarios/' + id)
+      const result = await api.delete(`/usuarios/${id}`)
       if(result.status === 200) {
         window.location.href = '/listar'
       } else {
@@ -87,7 +87,9 @@ function DataTable() {
                     <TableCell align="left" variant="body">{usuario.telefone}</TableCell>
                     <TableCell align="left" variant="body">{usuario.celular}</TableCell>
                     <TableCell align="left" variant="body">{usuario.cidade}</TableCell>
-                    <TableCell align="left" variant="body" >Editar</TableCell>
+                    <TableCell align="left" variant="body" >
+                      <Button href={`/editar/${usuario.id}`}>Editar</Button>
+                    </TableCell>
                     <TableCell align="left" variant="body">
                       <Button onClick={() => handleExcluir(usuario.id)}>Excluir</Button>
                     </TableCell>

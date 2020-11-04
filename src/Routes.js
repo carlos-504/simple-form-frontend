@@ -11,7 +11,7 @@ function Routes() {
       <Switch>
         <Route path="/" exact component={Main} />
         <Route path="/listar" exact component={Listar} />
-        <Route path="/editar" exact component={Editar} />
+        <Route path="/editar/:id" exact component={Editar} />
       </Switch>
     </BrowserRouter>
   );
