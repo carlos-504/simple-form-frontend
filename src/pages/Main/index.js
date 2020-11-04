@@ -1,5 +1,5 @@
 import React from "react";
-import Form from "../../components/Form";
+import FormCad from "../../components/Form/FormCad";
 import Navbar from "../../components/Navbar";
 import "../../App.css";
 import "fontsource-roboto";
@@ -11,7 +11,7 @@ function Main() {
       <Navbar />
       <Container component="div" maxWidth="md">
         <h1>Cadastrar Usuário</h1>
-        <Form />
+        <FormCad />
       </Container>
     </>
   );
