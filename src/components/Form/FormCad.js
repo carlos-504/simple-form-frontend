@@ -3,7 +3,7 @@ import { TextField, Button } from "@material-ui/core";
 import api from "../../api"
 import "./style.css"
 
-function Form_cad() {
+function FormCad() {
   const [nome, setNome] = useState("");
   const [sobrenome, setSobrenome] = useState("");
   const [email, setEmail] = useState("");
@@ -127,4 +127,4 @@ function Form_cad() {
   );
 }
 
-export default Form_cad;
+export default FormCad;

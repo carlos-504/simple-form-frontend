@@ -68,13 +68,11 @@ function DataTable() {
           <TableHead>
             <TableRow>
               <StyledTableCell align="left" variant="head">ID</StyledTableCell>
-              <StyledTableCell align="left" variant="head">Nome</StyledTableCell>
-              <StyledTableCell align="left" variant="head">Sobrenome</StyledTableCell>
+              <StyledTableCell align="left" variant="head">Nome</StyledTableCell>            
               <StyledTableCell align="left" variant="head">Email</StyledTableCell>
-              <StyledTableCell align="left" variant="head">Telefone</StyledTableCell>
               <StyledTableCell align="left" variant="head">Celular</StyledTableCell>
               <StyledTableCell align="left" variant="head">Cidade</StyledTableCell>
-              <StyledTableCell align="center" variant="head" colSpan="2" >Ações</StyledTableCell>
+              <StyledTableCell align="center" variant="head" colSpan="3" >Ações</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -82,11 +80,12 @@ function DataTable() {
                   <TableRow key={usuario.id} hover={true}>
                     <TableCell align="left" variant="body">{usuario.id}</TableCell>
                     <TableCell align="left" variant="body">{usuario.nome}</TableCell>
-                    <TableCell align="left" variant="body">{usuario.sobrenome}</TableCell>
                     <TableCell align="left" variant="body">{usuario.email}</TableCell>
-                    <TableCell align="left" variant="body">{usuario.telefone}</TableCell>
                     <TableCell align="left" variant="body">{usuario.celular}</TableCell>
                     <TableCell align="left" variant="body">{usuario.cidade}</TableCell>
+                    <TableCell align="left" variant="body" >
+                      <Button href={`/vizualizar/${usuario.id}`}>View</Button>
+                    </TableCell>
                     <TableCell align="left" variant="body" >
                       <Button href={`/editar/${usuario.id}`}>Editar</Button>
                     </TableCell>
