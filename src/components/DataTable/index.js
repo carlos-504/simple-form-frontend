@@ -14,6 +14,7 @@ import {ReactComponent as DeleteLogo} from '../../assets/images/deletar.svg'
 import {ReactComponent as EditaLogo} from '../../assets/images/editar.svg'
 import {ReactComponent as ViewLogo} from '../../assets/images/view.svg'
 import api from "../../api";
+import { toast } from 'react-toastify';
 import "./style.css"
 
 const StyledTableCell = withStyles((theme) => ({
@@ -44,15 +45,18 @@ function DataTable() {
         .catch(erro => console.log(erro))
   }, [])
 
-  async function handleExcluir(id){
-    if(window.confirm("Deseja realmente excluir esse usuário")){
-      const result = await api.delete(`/usuarios/${id}`)
-      if(result.status === 200) {
-        window.location.href = '/listar'
-      } else {
-        alert('Ocorreu um erro')
-      }
-    }
+  function handleExcluir(id){
+
+    api.delete(`/usuarios/${id}`)
+        .then(response => {
+          const deletar = usuarios.filter(usuarios => id !== usuarios.id)
+          setUsuario(deletar)
+          toast.success(`Usuário excluído com sucesso!`, {
+            position: toast.POSITION.TOP_CENTER
+          })
+        })
+        .catch(erro => console.log(erro))
+
   }
   
   return (
