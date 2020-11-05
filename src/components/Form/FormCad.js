@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@material-ui/core";
+import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 import api from "../../api"
 import "./style.css"
 
@@ -10,6 +12,7 @@ function FormCad() {
   const [telefone, setTelefone] = useState("");
   const [celular, setCelular] = useState("");
   const [cidade, setCidade] = useState("");
+  const history = useHistory()
 
   async function handlerSubmit(event){
 
@@ -23,25 +26,17 @@ function FormCad() {
       celular: celular,
       cidade: cidade
     }
-
-    const response = await api.post('/usuarios', dados)
-
-    if(response.status === 200){
-      window.location.href = '/listar'
-      console.log("Usuário cadastrado!!")
-    } else {
-      alert ('erro ao cadastrar')
+    
+    try{
+      const response = await api.post('/usuarios', dados)
+      toast.success(`Usuário ${response.data.nome} cadastrado`)
+      history.push('/listar')
+      
+    }catch(error) {
+      toast.error('Erro ao cadastrar')
+      return error.message.response.data
     }
-
-    /*
-    api.post('/usuarios', dados)
-        .then(() => {
-          alert('Dados cadastrados com sucesso')
-          //response.redirect(confirmCad)
-          //return <Link to="/confirmCad"/>
-        })
-        .catch(erro => console.log(erro))
-    */
+    
   }
 
   return (
@@ -57,7 +52,7 @@ function FormCad() {
           variant="outlined"
           margin="normal"
           fullWidth
-          required
+
         />
         <TextField
           value={sobrenome}
@@ -69,7 +64,7 @@ function FormCad() {
           variant="outlined"
           margin="normal"
           fullWidth
-          required
+
         />
         <TextField
           value={email}
@@ -81,7 +76,7 @@ function FormCad() {
           variant="outlined"
           margin="normal"
           fullWidth
-          required
+
         />
         <TextField
           value={telefone}
@@ -92,7 +87,7 @@ function FormCad() {
           name="telefone"
           variant="outlined"
           margin="normal"
-          required
+
         />
         <TextField
           value={celular}
@@ -103,7 +98,7 @@ function FormCad() {
           name="celular"
           variant="outlined"
           margin="normal"
-          required
+
         />
         <TextField
           value={cidade}
@@ -115,7 +110,7 @@ function FormCad() {
           variant="outlined"
           margin="normal"
           fullWidth
-          required
+
         />
         <div className="button_salvar">
           <Button variant="contained" color="primary" type="submit">
