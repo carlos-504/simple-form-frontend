@@ -29,7 +29,9 @@ function FormCad() {
     
     try{
       const response = await api.post('/usuarios', dados)
-      toast.success(`Usuário ${response.data.nome} cadastrado`)
+      toast.success(`Usuário ${response.data.nome} cadastrado!`, {
+        position: toast.POSITION.TOP_CENTER
+      })
       history.push('/listar')
       
     }catch(error) {
