@@ -55,7 +55,12 @@ function DataTable() {
             position: toast.POSITION.TOP_CENTER
           })
         })
-        .catch(erro => console.log(erro))
+        .catch(erro => {
+          console.log(erro)
+          toast.error(`Erro ao excluir usuário`, {
+            position: toast.POSITION.TOP_CENTER
+          })
+        })
 
   }
   
