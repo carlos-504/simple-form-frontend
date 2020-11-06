@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
 import { TextField, Button } from "@material-ui/core";
+import {toast} from 'react-toastify';
+import {useHistory} from 'react-router-dom';
 import api from "../../api";
 import "./style.css";
 
@@ -12,6 +14,7 @@ function FormEdit() {
   const [celular, setCelular] = useState("");
   const [cidade, setCidade] = useState("");
   const { id } = useParams();
+  const history = useHistory()
 
   useEffect(() => {
     api.get(`/usuarios/${id}`)
@@ -39,8 +42,21 @@ function FormEdit() {
       cidade: cidade,
     };
 
-    const response = await api.put(`/usuarios/${id}`, dados);
+    try{
+      const response = await api.put(`/usuarios/${id}`, dados);
+      toast.success(`Usuário ${response.data.nome} editado com sucesso`, {
+        position: toast.POSITION.TOP_CENTER
+      })
+      history.push("/listar")
+    }catch(erro){
+      console.log(erro)
+      toast.error(`Erro ao editar usuário`, {
+        position: toast.POSITION.TOP_CENTER
+      })
+    }
 
+
+    /*
     if (response.status === 200) {
       window.location.href = "/listar";
       console.log("Usuário editado!!");
