@@ -16,3 +16,7 @@ img {
 .button_salvar {
     float: left
 }
+
+.message_error{
+    color: red
+}

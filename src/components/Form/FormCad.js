@@ -1,52 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
 import { TextField, Button } from "@material-ui/core";
-import { toast } from 'react-toastify';
-import { useHistory } from 'react-router-dom';
-import api from "../../api"
-import "./style.css"
+import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import api from "../../api";
+import "./style.css";
 
 function FormCad() {
-  const [nome, setNome] = useState("");
-  const [sobrenome, setSobrenome] = useState("");
-  const [email, setEmail] = useState("");
-  const [telefone, setTelefone] = useState("");
-  const [celular, setCelular] = useState("");
-  const [cidade, setCidade] = useState("");
-  const history = useHistory()
-
-  async function handlerSubmit(event){
-
-    event.preventDefault()
-
-    const dados = {
-      nome: nome,
-      sobrenome: sobrenome,
-      email: email,
-      telefone: telefone,
-      celular: celular,
-      cidade: cidade
-    }
-    
-    try{
-      const response = await api.post('/usuarios', dados)
+  const history = useHistory();
+  const { register, errors, handleSubmit } = useForm();
+  
+  const onSubmit = async (data) => {
+    try {
+      const response = await api.post("/usuarios", data);
       toast.success(`Usuário ${response.data.nome} cadastrado!`, {
-        position: toast.POSITION.TOP_CENTER
-      })
-      history.push('/listar')
-      
-    }catch(error) {
-      toast.error('Erro ao cadastrar')
-      return error.message.response.data
+        position: toast.POSITION.TOP_CENTER,
+      });
+      history.push("/listar");
+    } catch (error) {
+      toast.error("Erro ao cadastrar");
+      return error.message.response.data;
     }
-    
-  }
+  };
 
   return (
     <>
-      <form onSubmit={handlerSubmit} >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <TextField
-          value={nome}
-          onChange={(event) => setNome(event.target.value)}
           type="text"
           label="Nome"
           id="nome"
@@ -54,11 +34,13 @@ function FormCad() {
           variant="outlined"
           margin="normal"
           fullWidth
-
+          inputRef={register({ required: "Esse campo é obrigatório", minLength: {
+            value: 5,
+            message: "Mínimo 5 caracteres"
+          } })}
         />
+        {errors.nome && <p className="message_error">{errors.nome.message}</p>}
         <TextField
-          value={sobrenome}
-          onChange={(event) => setSobrenome(event.target.value)}
           type="text"
           label="Sobrenome"
           id="sobrenome"
@@ -66,11 +48,10 @@ function FormCad() {
           variant="outlined"
           margin="normal"
           fullWidth
-
+          inputRef={register({ required: "Esse campo é obrigatório" })}
         />
+        {errors.sobrenome && <p className="message_error">{errors.sobrenome.message}</p>}
         <TextField
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
           type="email"
           label="Email"
           id="email"
@@ -78,33 +59,30 @@ function FormCad() {
           variant="outlined"
           margin="normal"
           fullWidth
-
+          inputRef={register({ required: "Esse campo é obrigatório" })}
         />
+        {errors.email && <p className="message_error">{errors.email.message}</p>}
         <TextField
-          value={telefone}
-          onChange={(event) => setTelefone(event.target.value)}
           type="number"
           label="Telefone"
           id="telefone"
           name="telefone"
           variant="outlined"
           margin="normal"
-
+          inputRef={register({ required: "Esse campo é obrigatório" })}
         />
+        {errors.telefone && <p className="message_error">{errors.telefone.message}</p>}
         <TextField
-          value={celular}
-          onChange={(event) => setCelular(event.target.value)}
           type="number"
           label="Celular"
           id="celular"
           name="celular"
           variant="outlined"
           margin="normal"
-
+          inputRef={register({ required: "Esse campo é obrigatório" })}
         />
+        {errors.celular && <p className="message_error">{errors.celular.message}</p>}
         <TextField
-          value={cidade}
-          onChange={(event) => setCidade(event.target.value)}
           type="text"
           label="Cidade"
           id="cidade"
@@ -112,8 +90,9 @@ function FormCad() {
           variant="outlined"
           margin="normal"
           fullWidth
-
+          inputRef={register({ required: "Esse campo é obrigatório" })}
         />
+        {errors.cidade?.type === "required" && <p className="message_error">{errors.cidade.message}</p>}
         <div className="button_salvar">
           <Button variant="contained" color="primary" type="submit">
             Salvar
