@@ -9,7 +9,7 @@ import "./style.css";
 function FormCad() {
   const history = useHistory();
   const { register, errors, handleSubmit } = useForm();
-  
+
   const onSubmit = async (data) => {
     try {
       const response = await api.post("/usuarios", data);
@@ -92,7 +92,7 @@ function FormCad() {
           fullWidth
           inputRef={register({ required: "Esse campo é obrigatório" })}
         />
-        {errors.cidade?.type === "required" && <p className="message_error">{errors.cidade.message}</p>}
+        {errors.cidade && <p className="message_error">{errors.cidade.message}</p>}
         <div className="button_salvar">
           <Button variant="contained" color="primary" type="submit">
             Salvar
